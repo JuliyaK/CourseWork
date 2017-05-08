@@ -40,7 +40,7 @@ namespace CourseWork
         {
             int x = 0;
             int y = 0;
-            string ColorFigure;
+            string сolorFigure = null;
             Figure figure = null;
             for (int i = 0; i <= 63; i++)
             {
@@ -48,41 +48,41 @@ namespace CourseWork
                 arrayCells[i].CoordinateY = y;
                 if ((x == 1 && x == 2) && (y >= 1 && y <= 8))
                 {
-                    ColorFigure = "White";
+                    сolorFigure = "White";
                 }
                 if ((x == 7 && x == 8) && (y >= 1 && y <= 8))
                 {
-                    ColorFigure = "Black";
+                    сolorFigure = "Black";
                 }
 
                 if ((x == 1 && y == 1) || (x == 1 && y == 8) || (x == 8 && y == 1) || (x == 8 && y == 8))
                 {
-                    figure = new Rook();
+                    figure = new Rook (сolorFigure);
                 }
 
                 if ((x == 1 && y == 2) || (x == 1 && y == 7) || (x == 8 && y == 2) || (x == 8 && y == 7))
                 {
-                    figure = new Kinght();
+                    figure = new Kinght(сolorFigure);
                 }
 
                 if ((x == 1 && y == 3) || (x == 1 && y == 6) || (x == 8 && y == 3) || (x == 8 && y == 6))
                 {
-                    figure = new Bishop();
+                    figure = new Bishop(сolorFigure);
                 }
 
                 if ((x == 1 && y == 4) || (x == 8 && y == 4))
                 {
-                    figure = new Queen();
+                    figure = new Queen(сolorFigure);
                 }
 
                 if ((x == 1 && y == 5) || (x == 8 && y == 5))
                 {
-                    figure = new King();
+                    figure = new King(сolorFigure);
                 }
 
                 if ((x == 2 && (y >= 1 && y <= 8)) || (x == 7 && (y >= 1 && y <= 8)))
                 {
-                    figure = new Pawn();
+                    figure = new Pawn(сolorFigure);
                 }
                 figure.CurrentCell = arrayCells[i];
                 arrayCells[i].CurrentFigure = figure;
