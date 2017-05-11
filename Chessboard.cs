@@ -8,16 +8,25 @@ namespace CourseWork
 {
     class Chessboard
     {
+        string сolorCell = null;
         public Cell [] arrayCells;
         public void MakeCells()
         {
             int x = 0;
             int y = 0;
-
-            arrayCells = new Cell[64];
             for (int i = 0; i <= 63; i++)
             {
-                arrayCells[i] = new Cell();
+                if (i % 2 == 0)
+            {
+                сolorCell = "White";
+            }
+            else
+            {
+                сolorCell = "Black";
+            }
+            arrayCells = new Cell[64];
+           
+                arrayCells[i] = new Cell(сolorCell);
                 if (i % 2 == 0)
                 {
                     arrayCells[i].Color = "White";

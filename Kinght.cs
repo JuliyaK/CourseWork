@@ -16,14 +16,14 @@ namespace CourseWork
             this.Color = сolorFigure;
             if (Convert.ToBoolean(сolorFigure = "White"))
             {
-                FileStream fs = new FileStream(@"C:\Users\Positronica\Documents\GitHub\CourseProject1\CourseWork\конь белый", FileMode.Open);
+                FileStream fs = new FileStream(@"kinght w.png", FileMode.Open);
                 Image img = Image.FromStream(fs);
                 fs.Close();
                 this.Image = img;
             }
             if (Convert.ToBoolean(сolorFigure = "Black"))
             {
-                FileStream fs = new FileStream(@"C:\Users\Positronica\Documents\GitHub\CourseProject1\CourseWork\конь черный", FileMode.Open);
+                FileStream fs = new FileStream(@"kinght b.png", FileMode.Open);
                 Image img = Image.FromStream(fs);
                 fs.Close();
                 this.Image = img;
