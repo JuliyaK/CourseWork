@@ -104,8 +104,8 @@ namespace CourseWork
         {
             Panel chessPanel = new Panel();
             PictureBox pictureChess = new PictureBox();
-            chessPanel.Location = new Point(56, 72);
-            chessPanel.Size = new Size(264, 152);
+            chessPanel.Location = new Point(16, 16);
+            chessPanel.Size = new Size(100, 100);
             chessPanel.BorderStyle = BorderStyle.Fixed3D;
             pictureChess.Location = new Point(16, 16);
             pictureChess.Size = new Size(64, 64);
