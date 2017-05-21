@@ -10,24 +10,25 @@ namespace CourseWork
 {
     class Chessboard:Panel
     {
+        
         string сolorCell = null;
         public Cell [] arrayCells;
+        
         public void MakeCells()
         {
             int x = 0;
             int y = 0;
+            arrayCells = new Cell[64];
             for (int i = 0; i <= 63; i++)
             {
                 if (i % 2 == 0)
-            {
-                сolorCell = "White";
-            }
-            else
-            {
-                сolorCell = "Black";
-            }
-            arrayCells = new Cell[64];
-           
+                 {
+                    сolorCell = "White";
+                 }
+                else
+                {
+                    сolorCell = "Black";
+                }
                 arrayCells[i] = new Cell(сolorCell);
                 if (i % 2 == 0)
                 {
@@ -45,6 +46,7 @@ namespace CourseWork
                 x++;
                 arrayCells[i].CoordinateX = x;
                 arrayCells[i].CoordinateY = y;
+                this.Controls.Add(arrayCells[i]);
             }
         }
         public void LocationFigures()
@@ -55,8 +57,8 @@ namespace CourseWork
             Figure figure = null;
             for (int i = 0; i <= 63; i++)
             {
-                arrayCells[i].CoordinateX = x;
-                arrayCells[i].CoordinateY = y;
+                x = arrayCells[i].CoordinateX;
+                y = arrayCells[i].CoordinateY;
                 if ((x == 1 && x == 2) && (y >= 1 && y <= 8))
                 {
                     сolorFigure = "White";
@@ -99,18 +101,6 @@ namespace CourseWork
                 arrayCells[i].CurrentFigure = figure;
                 arrayCells[i].Controls.Add(figure);
             }
-        }
-        public void CreateChessPanel()
-        {
-            Panel chessPanel = new Panel();
-            PictureBox pictureChess = new PictureBox();
-            chessPanel.Location = new Point(16, 16);
-            chessPanel.Size = new Size(100, 100);
-            chessPanel.BorderStyle = BorderStyle.Fixed3D;
-            pictureChess.Location = new Point(16, 16);
-            pictureChess.Size = new Size(64, 64);
-            this.Controls.Add(chessPanel);
-            chessPanel.Controls.Add(pictureChess);
         }
     }
 }

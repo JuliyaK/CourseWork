@@ -13,15 +13,15 @@ namespace CourseWork
     {
         public Kinght(string сolorFigure) : base()
         {
-            this.Color = сolorFigure;
-            if (Convert.ToBoolean(сolorFigure = "White"))
+            this.FigureColor = сolorFigure;
+            if (сolorFigure == "White")
             {
                 FileStream fs = new FileStream(@"kinght w.png", FileMode.Open);
                 Image img = Image.FromStream(fs);
                 fs.Close();
                 this.Image = img;
             }
-            if (Convert.ToBoolean(сolorFigure = "Black"))
+            if (сolorFigure == "Black")
             {
                 FileStream fs = new FileStream(@"kinght b.png", FileMode.Open);
                 Image img = Image.FromStream(fs);

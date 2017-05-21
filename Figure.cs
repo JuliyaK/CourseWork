@@ -10,7 +10,7 @@ namespace CourseWork
 {
    abstract class Figure:PictureBox
     {          
-        public string Color;
+        public string FigureColor;
         public Cell CurrentCell;
         public abstract void Walk(Cell newCell);
         public void Cheking(Cell newCell)

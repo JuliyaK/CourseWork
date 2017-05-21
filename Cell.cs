@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Drawing;
+
 
 
 namespace CourseWork
@@ -15,23 +15,23 @@ namespace CourseWork
     {
         public Cell(string сolorCell) : base()
         {
-            this.Color = сolorCell;
-            if (Convert.ToBoolean(сolorCell = "White"))
+            this.FigureColor = сolorCell;
+            if (сolorCell == "White")
             {
-                FileStream fs = new FileStream(@"cell w.png", FileMode.Open);
+                FileStream fs = new FileStream(@"cell w.jpg", FileMode.Open);
                 Image img = Image.FromStream(fs);
                 fs.Close();
                 this.Image = img;
             }
-            if (Convert.ToBoolean(сolorCell = "Black"))
+            if (сolorCell == "Black")
             {
-                FileStream fs = new FileStream(@"cell b.png", FileMode.Open);
+                FileStream fs = new FileStream(@"cell b.jpg", FileMode.Open);
                 Image img = Image.FromStream(fs);
                 fs.Close();
                 this.Image = img;
             }
         }
-        public string Color;
+        public string FigureColor;
         public Figure CurrentFigure;
         public int CoordinateX;
         public int CoordinateY;
