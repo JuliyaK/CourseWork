@@ -6,49 +6,69 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
+
+
 namespace CourseWork
 {
     class Chessboard:Panel
     {
-        
+       
         string сolorCell = null;
         public Cell [] arrayCells;
-        
+
         public void MakeCells()
         {
+           
             int x = 0;
             int y = 0;
             arrayCells = new Cell[64];
             for (int i = 0; i <= 63; i++)
             {
+                Chessboard paneli = new Chessboard();
                 if (i % 2 == 0)
                  {
                     сolorCell = "White";
-                 }
+                    
+                    
+                }
                 else
                 {
                     сolorCell = "Black";
+                    
                 }
                 arrayCells[i] = new Cell(сolorCell);
                 if (i % 2 == 0)
                 {
                     arrayCells[i].FigureColor = "White";
+                    paneli.BackColor = Color.White;
                 }
                 else
                 {
                     arrayCells[i].FigureColor = "Blak";
+                    paneli.BackColor = Color.Black;
                 }
                 if (i % 8 == 0)
                 {
                     y = y + 1;
                     x = 1;
+                    
+
+
                 }
                 x++;
+                paneli.Location = new Point(i * 60, i * 60);
+                paneli.Size = new Size(60, 60);
                 arrayCells[i].CoordinateX = x;
                 arrayCells[i].CoordinateY = y;
+                
+                
+               
+               
+                this.Controls.Add(paneli);
                 this.Controls.Add(arrayCells[i]);
             }
         }
+
         public void LocationFigures()
         {
             int x = 0;

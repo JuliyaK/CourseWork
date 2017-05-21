@@ -16,6 +16,10 @@ namespace CourseWork
         public Cell(string сolorCell) : base()
         {
             this.FigureColor = сolorCell;
+            
+               this.Size = new Size(60,60);
+              
+           
             if (сolorCell == "White")
             {
                 FileStream fs = new FileStream(@"cell w.jpg", FileMode.Open);
