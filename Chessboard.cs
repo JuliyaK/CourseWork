@@ -49,19 +49,22 @@ namespace CourseWork
                 }
                 if (i % 8 == 0)
                 {
-                    y = y + 1;
+                    y = y+1;
+                    y++;
                     x = 1;
-                    
-
+                   // paneli.Location = new Point(x * 60, y * 60);
 
                 }
+                //y++;
                 x++;
-                paneli.Location = new Point(i * 60, i * 60);
+               
+               paneli.Location = new Point(x*60, y * 60);
+                //paneli.Location = new Point(i * 60, i * 60);
                 paneli.Size = new Size(60, 60);
                 arrayCells[i].CoordinateX = x;
                 arrayCells[i].CoordinateY = y;
-                
-                
+
+               
                
                
                 this.Controls.Add(paneli);
