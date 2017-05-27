@@ -7,75 +7,68 @@ using System.Windows.Forms;
 using System.Drawing;
 
 
-
 namespace CourseWork
 {
-    class Chessboard:Panel
+    class Chessboard : Panel
     {
-       
+
         string сolorCell = null;
-        public Cell [] arrayCells;
+        public Cell[] arrayCells;
 
         public void MakeCells()
         {
-           
+
             int x = 0;
             int y = 0;
             arrayCells = new Cell[64];
-            for (int i = 0; i <= 63; i++)
+            int[,] board = {
+                { 1, 0, 1, 0, 1, 0, 1, 0 },
+                { 0, 1, 0, 1, 0, 1, 0, 1 },
+                { 1, 0, 1, 0, 1, 0, 1, 0 },
+                { 0, 1, 0, 1, 0, 1, 0, 1 },
+                { 1, 0, 1, 0, 1, 0, 1, 0 },
+                { 0, 1, 0, 1, 0, 1, 0, 1 },
+                { 1, 0, 1, 0, 1, 0, 1, 0 },
+                { 0, 1, 0, 1, 0, 1, 0, 1 },
+            };
+            for (int i = 0; i < 8; i++)
             {
-                Chessboard paneli = new Chessboard();
-                if (i % 2 == 0)
-                 {
-                    сolorCell = "White";
-                    
-                    
-                }
-                else
+                for (int j = 0; j < 8; j++)
                 {
-                    сolorCell = "Black";
-                    
-                }
-                arrayCells[i] = new Cell(сolorCell);
-                if (i % 2 == 0)
-                {
-                    arrayCells[i].FigureColor = "White";
-                    paneli.BackColor = Color.White;
-                }
-                else
-                {
-                    arrayCells[i].FigureColor = "Blak";
-                    paneli.BackColor = Color.Black;
-                }
-                if (i % 8 == 0)
-                {
-                    y = y+1;
-                    y++;
-                    x = 1;
-                   // paneli.Location = new Point(x * 60, y * 60);
+                    Chessboard paneli = new Chessboard();
 
-                }
-                //y++;
-                x++;
-               
-               paneli.Location = new Point(x*60, y * 60);
-                //paneli.Location = new Point(i * 60, i * 60);
-                paneli.Size = new Size(60, 60);
-                arrayCells[i].CoordinateX = x;
-                arrayCells[i].CoordinateY = y;
+                    if (board[i, j] == 0)
+                    {
+                        сolorCell = "Black";
+                        arrayCells[i] = new Cell(сolorCell);
+                        arrayCells[i].FigureColor = "Black";
+                        paneli.BackColor = Color.Black;
+                    }
+                    else
+                    {
+                        сolorCell = "White";
+                        arrayCells[i] = new Cell(сolorCell);
+                        arrayCells[i].FigureColor = "White";
+                        paneli.BackColor = Color.White;
+                    }
 
-               
-               
-               
-                this.Controls.Add(paneli);
-                this.Controls.Add(arrayCells[i]);
+                    paneli.Location = new Point(x * 60, y);
+                    arrayCells[i].Location = paneli.Location;
+                    paneli.Size = new Size(60, 60);
+                    x++;
+
+                    this.Controls.Add(paneli);
+                    this.Controls.Add(arrayCells[i]);
+                }
+                y = y + 60;
+                x = 0;
             }
         }
 
         public void LocationFigures()
         {
-            int x = 0;
-            int y = 0;
+            int x;
+            int y;
             string сolorFigure = null;
             Figure figure = null;
             for (int i = 0; i <= 63; i++)
@@ -93,7 +86,7 @@ namespace CourseWork
 
                 if ((x == 1 && y == 1) || (x == 1 && y == 8) || (x == 8 && y == 1) || (x == 8 && y == 8))
                 {
-                    figure = new Rook (сolorFigure);
+                    figure = new Rook(сolorFigure);
                 }
 
                 if ((x == 1 && y == 2) || (x == 1 && y == 7) || (x == 8 && y == 2) || (x == 8 && y == 7))
