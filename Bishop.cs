@@ -32,13 +32,17 @@ namespace CourseWork
         public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);
-            if (CurrentCell.CoordinateX != newCell.CoordinateX && CurrentCell.CoordinateY != newCell.CoordinateY)
+            if (CurrentCell.CoordinateX == newCell.CoordinateX || CurrentCell.CoordinateY == newCell.CoordinateY )
+            {
+                CurrentCell.CurrentFigure = null;
+                CurrentCell = newCell;
+                newCell.CurrentFigure = this;
+                
+            }
+            else
             {
                 throw new Exception("Фигура 'СЛОН' имеет другой алгоритм движения");
             }
-            CurrentCell.CurrentFigure = null;
-            CurrentCell = newCell;
-            newCell.CurrentFigure = this;
         }
     }
 }

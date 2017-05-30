@@ -31,15 +31,19 @@ namespace CourseWork
     public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);
-            if (CurrentCell.CoordinateX != newCell.CoordinateX || CurrentCell.CoordinateY != newCell.CoordinateY)
+            if (CurrentCell.CoordinateX == newCell.CoordinateX || CurrentCell.CoordinateY == newCell.CoordinateY)
             {
                 throw new Exception("Фигура 'ЛАДЬЯ' имеет другой алгоритм движения");
             }
+           
+
             CurrentCell.CurrentFigure = null;
             CurrentCell = newCell;
             newCell.CurrentFigure = this;
-            CurrentCell.Controls[0].Dispose();
+
             
         }
+            
+        
     }
 }

@@ -11,112 +11,182 @@ namespace CourseWork
 {
     class Chessboard : Panel
     {
-
-        string сolorCell = null;
-        public Cell[] arrayCells;
+        private Cell[,] _arrayCells;
+        private Figure _selectedFigure;
 
         public void MakeCells()
         {
-
-            int x = 0;
-            int y = 0;
-            arrayCells = new Cell[64];
-            int[,] board = {
-                { 1, 0, 1, 0, 1, 0, 1, 0 },
-                { 0, 1, 0, 1, 0, 1, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 1, 0 },
-                { 0, 1, 0, 1, 0, 1, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 1, 0 },
-                { 0, 1, 0, 1, 0, 1, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 1, 0 },
-                { 0, 1, 0, 1, 0, 1, 0, 1 },
-            };
-            for (int i = 0; i < 8; i++)
+            _arrayCells = new Cell[8, 8];
+            var cellColor = "";
+            var cellHeight = 80;
+            var cellWidth = 80;
+            for (var i = 0; i < 8; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (var j = 0; j < 8; j++)
                 {
-                    Chessboard paneli = new Chessboard();
-
-                    if (board[i, j] == 0)
+                    if (i % 2 == 0)
                     {
-                        сolorCell = "Black";
-                        arrayCells[i] = new Cell(сolorCell);
-                        arrayCells[i].FigureColor = "Black";
-                        paneli.BackColor = Color.Black;
-                    }
-                    else
+                        if (j % 2 == 0)
+                        {
+                            cellColor = "White";
+                        }
+                        else
+                        {
+                            cellColor = "Black";
+                        }
+                    } else
                     {
-                        сolorCell = "White";
-                        arrayCells[i] = new Cell(сolorCell);
-                        arrayCells[i].FigureColor = "White";
-                        paneli.BackColor = Color.White;
+                        if (j % 2 == 0)
+                        {
+                            cellColor = "Black";
+                        }
+                        else
+                        {
+                            cellColor = "White";
+                        }
                     }
-
-                    paneli.Location = new Point(x * 60, y);
-                    arrayCells[i].Location = paneli.Location;
-                    paneli.Size = new Size(60, 60);
-                    x++;
-
-                    this.Controls.Add(paneli);
-                    this.Controls.Add(arrayCells[i]);
+                    var x = j * cellWidth;
+                    var y = i * cellHeight;
+                    var cell = new Cell(cellColor)
+                    {
+                        Height = cellHeight,
+                        Width = cellWidth,
+                        Location = new Point(x, y),
+                        CoordinateX = x,
+                        CoordinateY = y
+                    };
+                    this.Controls.Add(cell);
+                    _arrayCells[i, j] = cell;
+                    cell.Click += OnCellClick;
                 }
-                y = y + 60;
-                x = 0;
             }
         }
 
-        public void LocationFigures()
+        private void OnCellClick(object sender, EventArgs e)
         {
-            int x;
-            int y;
-            string сolorFigure = null;
-            Figure figure = null;
-            for (int i = 0; i <= 63; i++)
+            var cell = (Cell)sender;
+            if (this._selectedFigure == null)
             {
-                x = arrayCells[i].CoordinateX;
-                y = arrayCells[i].CoordinateY;
-                if ((x == 1 && x == 2) && (y >= 1 && y <= 8))
-                {
-                    сolorFigure = "White";
-                }
-                if ((x == 7 && x == 8) && (y >= 1 && y <= 8))
-                {
-                    сolorFigure = "Black";
-                }
-
-                if ((x == 1 && y == 1) || (x == 1 && y == 8) || (x == 8 && y == 1) || (x == 8 && y == 8))
-                {
-                    figure = new Rook(сolorFigure);
-                }
-
-                if ((x == 1 && y == 2) || (x == 1 && y == 7) || (x == 8 && y == 2) || (x == 8 && y == 7))
-                {
-                    figure = new Kinght(сolorFigure);
-                }
-
-                if ((x == 1 && y == 3) || (x == 1 && y == 6) || (x == 8 && y == 3) || (x == 8 && y == 6))
-                {
-                    figure = new Bishop(сolorFigure);
-                }
-
-                if ((x == 1 && y == 4) || (x == 8 && y == 4))
-                {
-                    figure = new Queen(сolorFigure);
-                }
-
-                if ((x == 1 && y == 5) || (x == 8 && y == 5))
-                {
-                    figure = new King(сolorFigure);
-                }
-
-                if ((x == 2 && (y >= 1 && y <= 8)) || (x == 7 && (y >= 1 && y <= 8)))
-                {
-                    figure = new Pawn(сolorFigure);
-                }
-                figure.CurrentCell = arrayCells[i];
-                arrayCells[i].CurrentFigure = figure;
-                arrayCells[i].Controls.Add(figure);
+                return;
             }
+
+            try
+            {
+                this._selectedFigure.Walk(cell);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Ошибка", MessageBoxButtons.OK);
+            }
+            finally
+            {
+                this._selectedFigure = null;
+            }
+        }
+
+        private void OnFigureClick(object sender, EventArgs e)
+        {
+            var figure = (Figure)sender;
+            var cellFigure = figure.CurrentCell;
+
+            if (_selectedFigure != null)
+            {
+                cellFigure = figure.CurrentCell;
+                try
+            {
+                this._selectedFigure.Walk(cellFigure);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Ошибка", MessageBoxButtons.OK);
+            }
+            finally
+            {
+                this._selectedFigure = null;
+            } 
+            }
+            else
+            {
+                this._selectedFigure = figure;
+            }
+            
+           
+        }
+
+        public void LocateFigures()
+        {
+            for (var i = 0; i < 8; i++)
+            {
+                for (var j = 0; j < 8; j++)
+                {
+                    var cell = _arrayCells[i, j];
+                    var figure = this._CreateFigure(cell);
+                    if (figure != null)
+                    {
+                        cell.CurrentFigure = figure;
+                        figure.CurrentCell = cell;
+                        figure.Click += OnFigureClick;
+                    }
+                }
+            }
+        }
+
+        private string _GetFigureColor(Cell cell)
+        {
+            var result = "White";
+
+            if (cell.CoordinateY >= 480)
+            {
+                result = "Black";
+            }
+
+            return result;
+        }
+
+        private Figure _CreateFigure(Cell cell)
+        {
+            Figure figure = null;
+            var figureColor = this._GetFigureColor(cell);
+            var x = cell.CoordinateX;
+            var y = cell.CoordinateY;
+
+            // создаем пешки пешки
+            if (y == 80 || y == 480)
+            {
+                figure = new Pawn(figureColor);
+            }
+
+            // создаем ладьи
+            if ((x == 0 && y == 0) || (x == 560 && y == 0) || (x == 0 && y == 560) || (x == 560 && y == 560))
+            {
+                figure = new Rook(figureColor);
+            }
+
+            // создаем коней
+            if ((x == 80 && y == 0) || (x == 480 && y == 0) || (x == 80 && y == 560) || (x == 480 && y == 560))
+            {
+                figure = new Kinght(figureColor);
+            }
+
+            // создаем слонов
+            if ((x == 160 && y == 0) || (x == 400 && y == 0) || (x == 160 && y == 560) || (x == 400 && y == 560))
+            {
+                figure = new Bishop(figureColor);
+            }
+
+            // создаем королей
+            if ((x == 240 && y == 0) || (x == 240 && y == 560))
+            {
+                figure = new King(figureColor);
+            }
+
+            // создаем ферзей
+            if ((x == 320 && y == 0) || (x == 320 && y == 560))
+            {
+                figure = new Queen(figureColor);
+            }
+
+            return figure;
         }
     }
 }

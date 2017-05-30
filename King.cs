@@ -32,13 +32,20 @@ namespace CourseWork
         public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);
-            if (CurrentCell.CoordinateX - newCell.CoordinateX != 1)
+            var differenceX = newCell.CoordinateX - CurrentCell.CoordinateX;
+            var differenceY = newCell.CoordinateY - CurrentCell.CoordinateY;
+            if (differenceX > 80 || differenceY > 80)
             {
-                throw new Exception("Фигура 'КОРОЛЬ' имеет другой алгоритм движения");
+                throw new Exception("Фигура 'КОРОЛЬ' ходит только на одну клетку");
+            }
+            if(CurrentCell.CoordinateX != newCell.CoordinateX && CurrentCell.CoordinateY != newCell.CoordinateY)
+            {
+                throw new Exception("Фигура 'КОРОЛЬ' не ходит по диагонали");
             }
             CurrentCell.CurrentFigure = null;
             CurrentCell = newCell;
             newCell.CurrentFigure = this;
+            
         }
     }
 }

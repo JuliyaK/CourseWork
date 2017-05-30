@@ -11,32 +11,39 @@ using System.IO;
 
 namespace CourseWork
 {
-    class Cell : PictureBox
+    class Cell : Panel
     {
+        private Figure _figiure;
         public Cell(string сolorCell) : base()
         {
-            this.FigureColor = сolorCell;
-            
-               this.Size = new Size(60,60);
-              
-           
             if (сolorCell == "White")
             {
-                FileStream fs = new FileStream(@"cell w.jpg", FileMode.Open);
-                Image img = Image.FromStream(fs);
-                fs.Close();
-                this.Image = img;
+                this.BackColor = Color.White;
             }
             if (сolorCell == "Black")
             {
-                FileStream fs = new FileStream(@"cell b.jpg", FileMode.Open);
-                Image img = Image.FromStream(fs);
-                fs.Close();
-                this.Image = img;
+                this.BackColor = Color.Black;
             }
         }
-        public string FigureColor;
-        public Figure CurrentFigure;
+        public Figure CurrentFigure
+        {
+            get { return this._figiure; }
+            set
+            {
+                this._figiure = value;
+                this.Controls.Add(value);
+                
+            }
+        }
+        public void DeleteFigure()
+        {
+          
+            for (int index = 0; index <= Controls.Count-1; index++)
+            {
+                this.Controls[index].Dispose();
+            }
+        }
+
         public int CoordinateX;
         public int CoordinateY;
     }

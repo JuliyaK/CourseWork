@@ -31,15 +31,23 @@ namespace CourseWork
         }
         public override void Walk(Cell newCell)
         {
+            var differenceX = newCell.CoordinateX - CurrentCell.CoordinateX;
+            var differenceY = newCell.CoordinateY - CurrentCell.CoordinateY;
             base.Cheking(newCell);
-            if ((CurrentCell.CoordinateX != newCell.CoordinateX && CurrentCell.CoordinateY != (newCell.CoordinateY - 1)) || 
-                (CurrentCell.CoordinateX != newCell.CoordinateX && CurrentCell.CoordinateY != (newCell.CoordinateY + 1)))
+            if ( (differenceX == 80 && differenceY == -160) || (differenceY == -80 && differenceX == 160) || (differenceX == 160 && differenceY == 80) ||
+                (differenceX == 80 && differenceY == 160) || (differenceX == -80 && differenceY == 160) || (differenceX == -160 && differenceY == 80) ||
+                (differenceX == -160 && differenceY == -80) || (differenceX == -80 && differenceY == -160))
+            {
+                CurrentCell.CurrentFigure = null;
+                CurrentCell = newCell;
+                newCell.CurrentFigure = this;
+                
+            }
+            else
             {
                 throw new Exception("Фигура 'КОНЬ' имеет другой алгоритм движения");
             }
-            CurrentCell.CurrentFigure = null;
-            CurrentCell = newCell;
-            newCell.CurrentFigure = this;
+            
         }
     }
 }
