@@ -31,11 +31,48 @@ namespace CourseWork
         }
         public override void Walk(Cell newCell)
         {
+            if (FigureColor == "Black")
+            {
+                var difference = CurrentCell.CoordinateY - newCell.CoordinateY;
+                bool firstStep = CurrentCell.CoordinateY == 480;
+                if (CurrentCell.CoordinateX != newCell.CoordinateX)
+                {
+                    throw new Exception("Фигура 'ПЕШКА' так не ходит");
+                }
+                if(firstStep  && difference > 160)
+                {
+                    throw new Exception("Фигура 'ПЕШКА'  не может ходить на 2 клетки");
+                }
+                if(!firstStep && difference > 800)
+                {
+                    throw new Exception("Фигура 'ПЕШКА' больше не может ходить на 2 клетки");
+                }
+                
+            }
+            if (FigureColor == "White")
+            {
+                var difference = newCell.CoordinateY - CurrentCell.CoordinateY;
+                bool firstStep = CurrentCell.CoordinateY == 80;
+                if (CurrentCell.CoordinateX != newCell.CoordinateX)
+                {
+                    throw new Exception("Фигура 'ПЕШКА' так не ходит");
+                }
+                if (firstStep && difference > 160)
+                {
+                    throw new Exception("Фигура 'ПЕШКА'  не может ходить на 2 клетки");
+                }
+                if (!firstStep && difference > 80)
+                {
+                    throw new Exception("Фигура 'ПЕШКА' больше не может ходить на 2 клетки");
+                }
+            }
+
             base.Cheking(newCell);
-            if (CurrentCell.CoordinateX != newCell.CoordinateY)
+            if (CurrentCell.CoordinateY == newCell.CoordinateY)
             {
                 throw new Exception("Фигура 'ПЕШКА' имеет другой алгоритм движения");
             }
+           
             CurrentCell.CurrentFigure = null;
             CurrentCell = newCell;
             newCell.CurrentFigure = this;
