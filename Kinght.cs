@@ -29,25 +29,28 @@ namespace CourseWork
                 this.Image = img;
             }
         }
-        public override void Walk(Cell newCell)
+        public override void ChekingMove(Cell newCell)
         {
             var differenceX = newCell.CoordinateX - CurrentCell.CoordinateX;
             var differenceY = newCell.CoordinateY - CurrentCell.CoordinateY;
-            base.Cheking(newCell);
-            if ( (differenceX == 80 && differenceY == -160) || (differenceY == -80 && differenceX == 160) || (differenceX == 160 && differenceY == 80) ||
-                (differenceX == 80 && differenceY == 160) || (differenceX == -80 && differenceY == 160) || (differenceX == -160 && differenceY == 80) ||
-                (differenceX == -160 && differenceY == -80) || (differenceX == -80 && differenceY == -160))
+            if (((differenceX != 80) && (differenceY != -160)) || ((differenceY != -80) && (differenceX != 160)) || ((differenceX != 160) && (differenceY != 80)) ||
+               ((differenceX != 80) && (differenceY != 160)) || ((differenceX != -80) && (differenceY != 160)) || ((differenceX != -160) && (differenceY != 80)) ||
+               ((differenceX != -160) && (differenceY != -80)) || ((differenceX != -80) && (differenceY != -160)))
+            
             {
-                CurrentCell.CurrentFigure = null;
-                CurrentCell = newCell;
-                newCell.CurrentFigure = this;
-                
-            }
-            else
-            {
-                throw new Exception("Фигура 'КОНЬ' имеет другой алгоритм движения");
+                throw new Exception("Фигура 'КОНЬ' ходит только буквой 'Г'");
             }
             
+        }
+        public override void Walk(Cell newCell)
+        {
+            
+            base.Cheking(newCell);
+            this.ChekingMove(newCell);
+            CurrentCell.CurrentFigure = null;
+            CurrentCell = newCell;
+            newCell.CurrentFigure = this;
+             
         }
     }
 }
