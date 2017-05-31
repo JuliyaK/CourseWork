@@ -31,22 +31,18 @@ namespace CourseWork
         }
         public override void ChekingMove(Cell newCell)
         {
-
+            if (CurrentCell.CoordinateX != newCell.CoordinateX && CurrentCell.CoordinateY != newCell.CoordinateY)
+            {
+                throw new Exception("Фигура 'СЛОН' ходит только по горизонтали и вертикали");
+            }
         }
         public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);
-            if (CurrentCell.CoordinateX == newCell.CoordinateX || CurrentCell.CoordinateY == newCell.CoordinateY )
-            {
-                CurrentCell.CurrentFigure = null;
-                CurrentCell = newCell;
-                newCell.CurrentFigure = this;
-                
-            }
-            else
-            {
-                throw new Exception("Фигура 'СЛОН' ходит только по горизонтали и вертикали");
-            }
+            this.ChekingMove(newCell);
+            CurrentCell.CurrentFigure = null;
+            CurrentCell = newCell;
+            newCell.CurrentFigure = this;
         }
     }
 }

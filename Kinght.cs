@@ -33,9 +33,9 @@ namespace CourseWork
         {
             var differenceX = newCell.CoordinateX - CurrentCell.CoordinateX;
             var differenceY = newCell.CoordinateY - CurrentCell.CoordinateY;
-            if (((differenceX != 80) && (differenceY != -160)) || ((differenceY != -80) && (differenceX != 160)) || ((differenceX != 160) && (differenceY != 80)) ||
-               ((differenceX != 80) && (differenceY != 160)) || ((differenceX != -80) && (differenceY != 160)) || ((differenceX != -160) && (differenceY != 80)) ||
-               ((differenceX != -160) && (differenceY != -80)) || ((differenceX != -80) && (differenceY != -160)))
+            if (((differenceX != 80) || (differenceY != -160)) && ((differenceY != -80) || (differenceX != 160)) && ((differenceX != 160) || (differenceY != 80)) &&
+               ((differenceX != 80) || (differenceY != 160)) && ((differenceX != -80) || (differenceY != 160)) && ((differenceX != -160) || (differenceY != 80)) &&
+               ((differenceX != -160) || (differenceY != -80)) && ((differenceX != -80) || (differenceY != -160)))
             
             {
                 throw new Exception("Фигура 'КОНЬ' ходит только буквой 'Г'");

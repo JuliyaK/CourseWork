@@ -31,12 +31,12 @@ namespace CourseWork
         }
         public override void ChekingMove (Cell newCell)
         {
-
+           
         }
         public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);
-          
+            this.ChekingMove(newCell);
             CurrentCell.CurrentFigure = null;
             CurrentCell = newCell;
             newCell.CurrentFigure = this;
