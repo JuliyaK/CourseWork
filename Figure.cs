@@ -17,6 +17,7 @@ namespace CourseWork
         }
         public string FigureColor;
         public Cell CurrentCell;
+        public abstract void ChekingMove(Cell newCell);
         public abstract void Walk(Cell newCell);
         public void Cheking(Cell newCell)
         {

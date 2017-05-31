@@ -29,6 +29,10 @@ namespace CourseWork
                 this.Image = img;
             }
         }
+        public override void ChekingMove(Cell newCell)
+        {
+
+        }
         public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);
@@ -41,7 +45,7 @@ namespace CourseWork
             }
             else
             {
-                throw new Exception("Фигура 'СЛОН' имеет другой алгоритм движения");
+                throw new Exception("Фигура 'СЛОН' ходит только по горизонтали и вертикали");
             }
         }
     }

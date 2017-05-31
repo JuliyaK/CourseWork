@@ -29,6 +29,10 @@ namespace CourseWork
                 this.Image = img;
             }
         }
+        public override void ChekingMove (Cell newCell)
+        {
+
+        }
         public override void Walk(Cell newCell)
         {
             base.Cheking(newCell);

@@ -29,6 +29,13 @@ namespace CourseWork
                 this.Image = img;
             }
         }
+        public override void ChekingMove(Cell newCell)
+        {
+            if (CurrentCell.CoordinateY == newCell.CoordinateY)
+            {
+                throw new Exception("Фигура 'ПЕШКА' имеет другой алгоритм движения");
+            }
+        }
         public override void Walk(Cell newCell)
         {
             if (FigureColor == "Black")
@@ -37,7 +44,7 @@ namespace CourseWork
                 bool firstStep = CurrentCell.CoordinateY == 480;
                 if (CurrentCell.CoordinateX != newCell.CoordinateX)
                 {
-                    throw new Exception("Фигура 'ПЕШКА' так не ходит");
+                    throw new Exception("Фигура 'ПЕШКА' ходит на одну или две клетки вперед");
                 }
                 if(firstStep  && difference > 160)
                 {
@@ -55,7 +62,7 @@ namespace CourseWork
                 bool firstStep = CurrentCell.CoordinateY == 80;
                 if (CurrentCell.CoordinateX != newCell.CoordinateX)
                 {
-                    throw new Exception("Фигура 'ПЕШКА' так не ходит");
+                    throw new Exception("Фигура 'ПЕШКА' ходит на одну или две клетки вперед");
                 }
                 if (firstStep && difference > 160)
                 {
@@ -68,11 +75,7 @@ namespace CourseWork
             }
 
             base.Cheking(newCell);
-            if (CurrentCell.CoordinateY == newCell.CoordinateY)
-            {
-                throw new Exception("Фигура 'ПЕШКА' имеет другой алгоритм движения");
-            }
-           
+            this.ChekingMove(newCell);
             CurrentCell.CurrentFigure = null;
             CurrentCell = newCell;
             newCell.CurrentFigure = this;

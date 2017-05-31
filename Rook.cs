@@ -28,20 +28,20 @@ namespace CourseWork
                 this.Image = img;
             }
         }
-    public override void Walk(Cell newCell)
+        public override void ChekingMove(Cell newCell)
         {
-            base.Cheking(newCell);
             if (CurrentCell.CoordinateX == newCell.CoordinateX || CurrentCell.CoordinateY == newCell.CoordinateY)
             {
-                throw new Exception("Фигура 'ЛАДЬЯ' имеет другой алгоритм движения");
-            }
-           
-
+                throw new Exception("Фигура 'ЛАДЬЯ' ходит только по диагонали");
+            }  
+        }
+        public override void Walk(Cell newCell)
+        {
+            base.Cheking(newCell);
+            this.ChekingMove(newCell);
             CurrentCell.CurrentFigure = null;
             CurrentCell = newCell;
             newCell.CurrentFigure = this;
-
-            
         }
             
         
